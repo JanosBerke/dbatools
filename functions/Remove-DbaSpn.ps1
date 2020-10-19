@@ -1,4 +1,3 @@
-#ValidationTags#FlowControl,Pipeline#
 function Remove-DbaSpn {
     <#
     .SYNOPSIS
@@ -56,12 +55,12 @@ function Remove-DbaSpn {
         Connects to Active Directory and removes a provided SPN to the given account. Uses alternative account to connect to AD.
 
     .EXAMPLE
-        PS C:\> Test-DbaSpn -ComputerName sql2005 | Where { $_.isSet -eq $true } | Remove-DbaSpn -WhatIf
+        PS C:\> Test-DbaSpn -ComputerName sql2005 | Where-Object { $_.isSet -eq $true } | Remove-DbaSpn -WhatIf
 
         Shows what would happen trying to remove all set SPNs for sql2005 and the relative delegations
 
     .EXAMPLE
-        PS C:\> Test-DbaSpn -ComputerName sql2005 | Where { $_.isSet -eq $true } | Remove-DbaSpn
+        PS C:\> Test-DbaSpn -ComputerName sql2005 | Where-Object { $_.isSet -eq $true } | Remove-DbaSpn
 
         Removes all set SPNs for sql2005 and the relative delegations
 
@@ -76,7 +75,6 @@ function Remove-DbaSpn {
         [string]$ServiceAccount,
         [Parameter(ValueFromPipelineByPropertyName)]
         [PSCredential]$Credential,
-        [Alias('Silent')]
         [switch]$EnableException
     )
 
@@ -116,7 +114,7 @@ function Remove-DbaSpn {
                 if ($spnadobject -contains $spn) {
                     $null = $spnadobject.Remove($spn)
                     $adentry.CommitChanges()
-                    Write-Message -Message "Remove SPN $spn for $serviceaccount" -Level Verbose
+                    Write-Message -Message "Remove SPN $spn for $ServiceAccount" -Level Verbose
                     $set = $false
                     $status = "Successfully removed SPN"
                 }

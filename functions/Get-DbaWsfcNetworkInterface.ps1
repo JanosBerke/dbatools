@@ -1,4 +1,3 @@
-#ValidationTags#Messaging,FlowControl,Pipeline,CodeStyle#
 function Get-DbaWsfcNetworkInterface {
     <#
     .SYNOPSIS
@@ -21,7 +20,7 @@ function Get-DbaWsfcNetworkInterface {
         Using this switch turns this "nice by default" feature off and enables you to catch exceptions with your own try/catch.
 
     .NOTES
-        Tags: Cluster, WSFC, FCI, HA
+        Tags: WSFC, FCI, WindowsCluster, HA
         Author: Chrissy LeMaire (@cl), netnerds.net
 
         Website: https://dbatools.io
@@ -37,10 +36,9 @@ function Get-DbaWsfcNetworkInterface {
         Gets network interface information from the failover cluster cluster01
 
     .EXAMPLE
-        PS C:\> Get-DbaWsfcNetworkInterface -ComputerName cluster01 | Select *
+        PS C:\> Get-DbaWsfcNetworkInterface -ComputerName cluster01 | Select-Object *
 
         Shows all network interface  values, including the ones not shown in the default view
-
     #>
     [CmdletBinding()]
     param (
